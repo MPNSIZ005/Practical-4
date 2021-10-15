@@ -8,8 +8,8 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-GPIO.setup(7,GPIO.IN,pull_up_down=GPIO.PUD_UP)
-GPIO.add_event_detect(7,GPIO.FALLING,callback=somefunction,bouncetime=300)
+GPIO.setup(7,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(7,GPIO.RISING,callback=somefunction,bouncetime=300)
 
 spi = spidev.SpiDev()
 spi.open(0,0)
@@ -65,3 +65,6 @@ while True:
   print(str(count)+"s"+"\t\t"+str(temp_level)+"t\t\t"+str(temp)+" C\t\t"+str(light_level))
   count = count + delay
   time.sleep(delay)
+
+  
+GPIO.cleanup()
